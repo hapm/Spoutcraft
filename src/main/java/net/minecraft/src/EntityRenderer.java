@@ -16,7 +16,7 @@ import org.lwjgl.util.glu.GLU;
 import com.pclewis.mcpatcher.mod.Shaders;
 import org.lwjgl.util.vector.*;
 import org.spoutcraft.client.SpoutClient;
-import org.spoutcraft.client.config.ConfigReader;
+import org.spoutcraft.client.config.Configuration;
 import org.spoutcraft.client.spoutworth.SpoutWorth;
 // Spout End
 
@@ -338,7 +338,7 @@ public class EntityRenderer {
 	private void setupCameraTransform(float par1, int par2) {
 		// Spout Start
 		this.farPlaneDistance = (float) (32 << 3 - this.mc.gameSettings.renderDistance);
-		if (ConfigReader.farView) {
+		if (Configuration.isFarView()) {
 			if (this.farPlaneDistance < 256.0F) {
 				this.farPlaneDistance *= 3.0F;
 			} else {
@@ -346,7 +346,7 @@ public class EntityRenderer {
 			}
 		}
 
-		if (ConfigReader.fancyFog) {
+		if (Configuration.isFancyFog()) {
 			this.farPlaneDistance *= 0.95F;
 		} else {
 			this.farPlaneDistance *= 0.83F;
@@ -601,28 +601,24 @@ public class EntityRenderer {
 		// Spout Start
 		World world = this.mc.theWorld;
 
-		/*if(Thread.currentThread().getPriority() != 10) {
-			Thread.currentThread().setPriority(10);
-		}*/
-		
 		// Keep this off
 		// Advanced GL causes rendering holes
 		// TODO Fix
-		mc.gameSettings.advancedOpengl = false;
-		/*if (Shaders.isEnabled()) {
+		//mc.gameSettings.advancedOpengl = false;
+		if (Shaders.isEnabled()) {
 			mc.gameSettings.fancyGraphics = true;
-		}*/
+		}
 
-		Block.leaves.setGraphicsLevel(ConfigReader.fancyTrees);
+		Block.leaves.setGraphicsLevel(Configuration.isFancyTrees());
 
-		if (!ConfigReader.weather && world != null && world.worldInfo != null) {
+		if (!Configuration.isWeather() && world != null && world.worldInfo != null) {
 			world.worldInfo.setRaining(false);
 		}
 
 		if (world != null) {
 			long rawTime = world.getWorldTime();
 			long time = rawTime % 24000L;
-			if (ConfigReader.time == 2) { // day
+			if (Configuration.getTime() == 2) { // day
 				if (time <= 1000L) {
 					world.worldInfo.setWorldTime(rawTime - time + 1001L);
 				}
@@ -632,7 +628,7 @@ public class EntityRenderer {
 				}
 			}
 
-			else if (ConfigReader.time == 1) { // night
+			else if (Configuration.getTime() == 1) { // night
 				if (time <= 14000L) {
 					world.worldInfo.setWorldTime(rawTime - time + 14001L);
 				}
@@ -706,7 +702,7 @@ public class EntityRenderer {
 				this.mc.mcProfiler.endStartSection("gui");
 				if (!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null) {
 					// Spout Start
-					if (ConfigReader.fastDebug != 0) {
+					if (Configuration.getFastDebug() != 0) {
 						if (Minecraft.isDebugInfoEnabled()) {
 							this.showDebugInfo = !this.showDebugInfo;
 						}
@@ -717,7 +713,7 @@ public class EntityRenderer {
 					}
 
 					this.mc.ingameGUI.renderGameOverlay(par1, this.mc.currentScreen != null, var11, var13);
-					if (ConfigReader.fastDebug != 0) {
+					if (Configuration.getFastDebug() != 0) {
 						this.mc.gameSettings.showDebugInfo = false;
 					}
 					// Spout End
@@ -795,7 +791,7 @@ public class EntityRenderer {
 			// Spout End
 			this.mc.mcProfiler.endStartSection("frustrum");
 			ClippingHelperImpl.getInstance();
-			if (this.mc.gameSettings.renderDistance < 2 || ConfigReader.farView) { // Spout
+			if (this.mc.gameSettings.renderDistance < 2 || Configuration.isFarView()) { // Spout
 				this.setupFog(-1, par1);
 				this.mc.mcProfiler.endStartSection("sky");
 				var5.renderSky(par1);
@@ -957,13 +953,13 @@ public class EntityRenderer {
 		float var1 = this.mc.theWorld.getRainStrength(1.0F);
 		// Spout Start
 
-		if (!ConfigReader.weather) {
+		if (!Configuration.isWeather()) {
 			return;
 		}
 		if (SpoutWorth.getInstance().isBelowIdeal()) {
 			var1 /= 4.0F;
 		}
-		if (!ConfigReader.fancyWeather) {
+		if (!Configuration.isFancyWeather()) {
 			var1 /= 2.0F;
 		}
 
@@ -1027,7 +1023,7 @@ public class EntityRenderer {
 
 	protected void renderRainSnow(float par1) {
 		// Spout Start
-		if (!ConfigReader.weather) {
+		if (!Configuration.isWeather()) {
 			return;
 		}
 		// Spout End
@@ -1067,7 +1063,7 @@ public class EntityRenderer {
 			int var15 = MathHelper.floor_double(var11);
 			byte var16 = 5;
 			// Spout Start
-			if (ConfigReader.fancyWeather) {
+			if (Configuration.isFancyWeather()) {
 				var16 = 10;
 			}
 			// Spout End
@@ -1354,7 +1350,7 @@ public class EntityRenderer {
 					if (var3.isPotionActive(Potion.waterBreathing)) {
 						density = 0.05F;
 					}
-					if (ConfigReader.clearWater) {
+					if (Configuration.isClearWater()) {
 						density = 0.02F;
 					}
 					GL11.glFogf(GL11.GL_FOG_DENSITY, density);
@@ -1400,7 +1396,7 @@ public class EntityRenderer {
 					}
 
 					// Spout Start
-					if (!ConfigReader.voidFog) {
+					if (!Configuration.isVoidFog()) {
 						var6 = 0.8F * this.farPlaneDistance;
 						var12 = this.farPlaneDistance;
 					}
@@ -1417,7 +1413,7 @@ public class EntityRenderer {
 
 					if (GLContext.getCapabilities().GL_NV_fog_distance) {
 						// Spout Start
-						if (ConfigReader.fancyFog) {
+						if (Configuration.isFancyFog()) {
 							GL11.glFogi('\u855a', '\u855b');
 						} else {
 							GL11.glFogi('\u855a', '\u855c');

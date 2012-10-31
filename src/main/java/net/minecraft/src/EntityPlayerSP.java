@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 // Spout Start
 import org.bukkit.ChatColor;
 import org.spoutcraft.client.SpoutClient;
-import org.spoutcraft.client.config.ConfigReader;
+import org.spoutcraft.client.config.Configuration;
 import org.spoutcraft.client.gui.minimap.GuiAddWaypoint;
 import org.spoutcraft.client.gui.minimap.GuiOverviewMap;
 import org.spoutcraft.client.packet.PacketRenderDistance;
@@ -38,7 +38,7 @@ public class EntityPlayerSP extends EntityPlayer {
 		this.dimension = par4;
 		// Spout Start
 		if (par3Session != null && par3Session.username != null && par3Session.username.length() > 0) {
-			this.skinUrl = "http://static.spout.org/skin/" + ChatColor.stripColor(par3Session.username) + ".png";
+			this.skinUrl = "http://cdn.spout.org/game/vanilla/skin/" + ChatColor.stripColor(par3Session.username) + ".png";
 			this.vip = Resources.getVIP(ChatColor.stripColor(par3Session.username));
 			if (vip != null) {
 				this.displayName = vip.getTitle();
@@ -189,11 +189,11 @@ public class EntityPlayerSP extends EntityPlayer {
 			if (this.capabilities.isFlying) {
 				// Spout Start
 				if (this.movementInput.flyingDown) { 
-					this.motionY -= 0.15D * ConfigReader.flightSpeedMultiplier;
+					this.motionY -= 0.15D * Configuration.getFlightSpeedFactor();
 				}
 
 				if (this.movementInput.flyingUp) {
-					this.motionY += 0.15D * ConfigReader.flightSpeedMultiplier;
+					this.motionY += 0.15D * Configuration.getFlightSpeedFactor();
 				}
 				// Spout End
 			}
@@ -212,10 +212,8 @@ public class EntityPlayerSP extends EntityPlayer {
 			var1 *= 1.1F;
 		}
 
-		// Spout Start
-		float landMoveFactor = this.speedOnGround * ((isSprinting() || runToggle) ? 1.3F : 1F);
+		float landMoveFactor = this.speedOnGround * (isSprinting() ? 1.3F : 1F);
 		var1 *= (landMoveFactor * this.getSpeedModifier() / this.speedOnGround + 1.0F) / 2.0F;
-		// Spout End
 		if (this.isUsingItem() && this.getItemInUse().itemID == Item.bow.shiftedIndex) {
 			int var2 = this.getItemInUseDuration();
 			float var3 = (float)var2 / 20.0F;
@@ -442,7 +440,8 @@ public class EntityPlayerSP extends EntityPlayer {
 				fogKey = settings.keyBindToggleFog;
 				settings.keyBindToggleFog = new KeyBinding("key.fog", -1);
 				if (view != newView) {
-					settings.renderDistance = newView;
+					Configuration.setRenderDistance(newView);
+					Configuration.write();
 					if (this instanceof EntityClientPlayerMP && Spoutcraft.getClient().isSpoutEnabled()) {
 						SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketRenderDistance((byte)newView));
 					}

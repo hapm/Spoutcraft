@@ -42,7 +42,7 @@ import org.bukkit.ChatColor;
 import org.spoutcraft.client.SpoutClient;
 import org.spoutcraft.client.chunkcache.HeightMap;
 import org.spoutcraft.client.chunkcache.HeightMapAgent;
-import org.spoutcraft.client.config.ConfigReader;
+import org.spoutcraft.client.config.Configuration;
 import org.spoutcraft.client.controls.SimpleKeyBindingManager;
 import org.spoutcraft.client.gui.ScreenUtil;
 import org.spoutcraft.client.gui.minimap.MinimapConfig;
@@ -580,11 +580,11 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 			
 			System.out.println("Spoutcraft Configuration Information");
 			try {
-				for (Field f : ConfigReader.class.getFields()) {
+				for (Field f : Configuration.class.getFields()) {
 					System.out.println("    " + f.getName() + " : " + f.get(null));
 				}
 			} catch (Exception ignore) { }
-			throw new RuntimeException("OpenGL Error occured!");
+			throw new RuntimeException("OpenGL Exception: (" + par1Str + ", " + var3 + ")");
 			// Spout End
 		}
 	}
@@ -1286,6 +1286,13 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 			this.mcProfiler.endStartSection("mouse");
 
 			while (Mouse.next()) {
+				// Spout Start
+				if (Mouse.getEventButton() >= 0) {
+					((SimpleKeyBindingManager) SpoutClient.getInstance().getKeyBindingManager()).pressKey(Mouse.getEventButton() - 100, Mouse.getEventButtonState(), ScreenUtil.getType(currentScreen).getCode());
+					this.thePlayer.handleKeyPress(Mouse.getEventButton() - 100, Mouse.getEventButtonState()); // Spout handle key press
+				}
+				// Spout End
+				
 				KeyBinding.setKeyBindState(Mouse.getEventButton() - 100, Mouse.getEventButtonState());
 				if (Mouse.getEventButtonState()) {
 					KeyBinding.onTick(Mouse.getEventButton() - 100);
@@ -1388,7 +1395,7 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 
 						int var5;
 						// Spout Start
-						if (ConfigReader.hotbarQuickKeysEnabled) { 
+						if (Configuration.isHotbarQuickKeysEnabled()) { 
 							for (var5 = 0; var5 < 9; ++var5) {
 								if (Keyboard.getEventKey() == 2 + var5) {
 									this.thePlayer.inventory.currentItem = var5;
