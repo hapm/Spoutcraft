@@ -21,7 +21,7 @@ public class FontRenderer {
 	public int fontTextureName = 0;
 
 	/** the height in pixels of default text */
-	public int FONT_HEIGHT = 9;
+	public int FONT_HEIGHT = 8; // Spout smaller text
 	public Random fontRandom = new Random();
 	private byte[] glyphWidth = new byte[65536];
 	private int[] glyphTextureName = new int[256];
