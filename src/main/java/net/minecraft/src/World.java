@@ -1090,7 +1090,7 @@ public abstract class World implements IBlockAccess {
 			for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5) {
 				((IWorldAccess)this.worldAccesses.get(var5)).func_85102_a(par1EntityPlayer, par2Str, par1EntityPlayer.posX, par1EntityPlayer.posY - (double)par1EntityPlayer.yOffset, par1EntityPlayer.posZ, par3, par4);
 			}
-	}
+		}
 	}
 
 	/**
@@ -1691,9 +1691,6 @@ public abstract class World implements IBlockAccess {
 		this.scanningTileEntities = false;
 
 		if (!this.entityRemoval.isEmpty()) {
-			this.loadedTileEntityList.removeAll(this.entityRemoval);
-			this.entityRemoval.clear();
-		}
 
 		this.theProfiler.endStartSection("pendingTileEntities");
 

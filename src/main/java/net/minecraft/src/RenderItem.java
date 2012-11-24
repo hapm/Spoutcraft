@@ -10,7 +10,6 @@ import org.spoutcraft.api.material.MaterialData;
 import org.spoutcraft.client.io.CustomTextureManager;
 
 public class RenderItem extends Render {
-
 	private RenderBlocks renderBlocks = new RenderBlocks();
 
 	/** The RNG used in RenderItem (for bobbing itemstacks on the ground) */
