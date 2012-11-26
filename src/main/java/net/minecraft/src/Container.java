@@ -83,7 +83,7 @@ public abstract class Container {
 				this.inventoryItemStacks.set(var1, var3);
 
 				for (int var4 = 0; var4 < this.crafters.size(); ++var4) {
-					((ICrafting) this.crafters.get(var4)).sendSlotContents(this, var1, var3);
+					((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
 				}
 			}
 		}

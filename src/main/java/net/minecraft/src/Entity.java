@@ -202,7 +202,8 @@ public abstract class Entity {
 	public boolean partiallyInWater = false;
 	public org.spoutcraft.api.entity.Entity spoutEntity;
 	public UUID uniqueId = UUID.randomUUID();
-	public boolean wasOnGround;	public boolean clientonly = false;
+	public boolean wasOnGround;
+	public boolean clientonly = false;
 	// Spout End
 	public EnumEntitySize myEntitySize;
 
@@ -243,12 +244,14 @@ public abstract class Entity {
 		this.myEntitySize = EnumEntitySize.SIZE_2;
 		this.worldObj = par1World;
 		this.setPosition(0.0D, 0.0D, 0.0D);
+
 		if (par1World != null) {
 			this.dimension = par1World.provider.dimensionId;
 		}
 
 		this.dataWatcher.addObject(0, Byte.valueOf((byte)0));
-		this.dataWatcher.addObject(1, Short.valueOf((short)300));		this.entityInit();
+		this.dataWatcher.addObject(1, Short.valueOf((short)300));
+		this.entityInit();
 	}
 
 	protected abstract void entityInit();
@@ -379,6 +382,7 @@ public abstract class Entity {
 		this.prevRotationPitch = this.rotationPitch;
 		this.prevRotationYaw = this.rotationYaw;
 		int var2;
+
 		if (!this.worldObj.isRemote && this.worldObj instanceof WorldServer) {
 			this.worldObj.theProfiler.startSection("portal");
 			MinecraftServer var1 = ((WorldServer)this.worldObj).getMinecraftServer();
@@ -406,9 +410,11 @@ public abstract class Entity {
 					this.field_82153_h = 0;
 				}
 			}
+
 			if (this.timeUntilPortal > 0) {
 				--this.timeUntilPortal;
 			}
+
 			this.worldObj.theProfiler.endSection();
 		}
 		if (this.isSprinting() && !this.isInWater()) {
@@ -420,6 +426,7 @@ public abstract class Entity {
 				this.worldObj.spawnParticle("tilecrack_" + var4 + "_" + this.worldObj.getBlockMetadata(var5, var2, var6), this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, -this.motionX * 4.0D, 1.5D, -this.motionZ * 4.0D);
 			}
 		}
+
 		this.handleWaterMovement();
 
 		if(this.worldObj.isRemote) {
@@ -520,6 +527,7 @@ public abstract class Entity {
 			double var7 = this.posX;
 			double var9 = this.posY;
 			double var11 = this.posZ;
+
 			if (this.isInWeb) {
 				this.isInWeb = false;
 				par1 *= 0.25D;
@@ -529,13 +537,16 @@ public abstract class Entity {
 				this.motionY = 0.0D;
 				this.motionZ = 0.0D;
 			}
+
 			double var13 = par1;
 			double var15 = par3;
 			double var17 = par5;
 			AxisAlignedBB var19 = this.boundingBox.copy();
 			boolean var20 = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
+
 			if (var20) {
 				double var21;
+
 				for (var21 = 0.05D; par1 != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.getOffsetBoundingBox(par1, -1.0D, 0.0D)).isEmpty(); var13 = par1) {
 					if (par1 < var21 && par1 >= -var21) {
 						par1 = 0.0D;
@@ -545,6 +556,7 @@ public abstract class Entity {
 						par1 += var21;
 					}
 				}
+
 				for (; par5 != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.getOffsetBoundingBox(0.0D, -1.0D, par5)).isEmpty(); var17 = par5) {
 					if (par5 < var21 && par5 >= -var21) {
 						par5 = 0.0D;
@@ -562,6 +574,7 @@ public abstract class Entity {
 					} else {
 						par1 += var21;
 					}
+
 					if (par5 < var21 && par5 >= -var21) {
 						par5 = 0.0D;
 					} else if (par5 > 0.0D) {
@@ -569,44 +582,54 @@ public abstract class Entity {
 					} else {
 						par5 += var21;
 					}
+
 					var13 = par1;
 					var17 = par5;
 				}
 			}
+
 			List var35 = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.addCoord(par1, par3, par5));
 			for (int var22 = 0; var22 < var35.size(); ++var22) {
 				par3 = ((AxisAlignedBB)var35.get(var22)).calculateYOffset(this.boundingBox, par3);
 			}
 			this.boundingBox.offset(0.0D, par3, 0.0D);
+
 			if (!this.field_70135_K && var15 != par3) {
 				par5 = 0.0D;
 				par3 = 0.0D;
 				par1 = 0.0D;
 			}
+
 			boolean var34 = this.onGround || var15 != par3 && var15 < 0.0D;
 			int var23;
+
 			for (var23 = 0; var23 < var35.size(); ++var23) {
 				par1 = ((AxisAlignedBB)var35.get(var23)).calculateXOffset(this.boundingBox, par1);
 			}
 			this.boundingBox.offset(par1, 0.0D, 0.0D);
+
 			if (!this.field_70135_K && var13 != par1) {
 				par5 = 0.0D;
 				par3 = 0.0D;
 				par1 = 0.0D;
 			}
+
 			for (var23 = 0; var23 < var35.size(); ++var23) {
 				par5 = ((AxisAlignedBB)var35.get(var23)).calculateZOffset(this.boundingBox, par5);
 			}
 			this.boundingBox.offset(0.0D, 0.0D, par5);
+
 			if (!this.field_70135_K && var17 != par5) {
 				par5 = 0.0D;
 				par3 = 0.0D;
 				par1 = 0.0D;
 			}
+
 			double var25;
 			double var27;
 			int var30;
 			double var36;
+
 			if (this.stepHeight > 0.0F && var34 && (var20 || this.ySize < 0.05F) && (var13 != par1 || var17 != par5)) {
 				var36 = par1;
 				var25 = par3;
@@ -617,44 +640,53 @@ public abstract class Entity {
 				AxisAlignedBB var29 = this.boundingBox.copy();
 				this.boundingBox.setBB(var19);
 				var35 = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.addCoord(var13, par3, var17));
+
 				for (var30 = 0; var30 < var35.size(); ++var30) {
 					par3 = ((AxisAlignedBB)var35.get(var30)).calculateYOffset(this.boundingBox, par3);
 				}
 				this.boundingBox.offset(0.0D, par3, 0.0D);
+
 				if (!this.field_70135_K && var15 != par3) {
 					par5 = 0.0D;
 					par3 = 0.0D;
 					par1 = 0.0D;
 				}
+
 				for (var30 = 0; var30 < var35.size(); ++var30) {
 					par1 = ((AxisAlignedBB)var35.get(var30)).calculateXOffset(this.boundingBox, par1);
 				}
 				this.boundingBox.offset(par1, 0.0D, 0.0D);
+
 				if (!this.field_70135_K && var13 != par1) {
 					par5 = 0.0D;
 					par3 = 0.0D;
 					par1 = 0.0D;
 				}
+
 				for (var30 = 0; var30 < var35.size(); ++var30) {
 					par5 = ((AxisAlignedBB)var35.get(var30)).calculateZOffset(this.boundingBox, par5);
 				}
 				this.boundingBox.offset(0.0D, 0.0D, par5);
+
 				if (!this.field_70135_K && var17 != par5) {
 					par5 = 0.0D;
 					par3 = 0.0D;
 					par1 = 0.0D;
 				}
+
 				if (!this.field_70135_K && var15 != par3) {
 					par5 = 0.0D;
 					par3 = 0.0D;
 					par1 = 0.0D;
 				} else {
 					par3 = (double)(-this.stepHeight);
+
 					for (var30 = 0; var30 < var35.size(); ++var30) {
 						par3 = ((AxisAlignedBB)var35.get(var30)).calculateYOffset(this.boundingBox, par3);
 					}
 					this.boundingBox.offset(0.0D, par3, 0.0D);
 				}
+
 				if (var36 * var36 + var27 * var27 >= par1 * par1 + par5 * par5) {
 					par1 = var36;
 					par3 = var25;
@@ -662,6 +694,7 @@ public abstract class Entity {
 					this.boundingBox.setBB(var29);
 				} else {
 					double var40 = this.boundingBox.minY - (double)((int)this.boundingBox.minY);
+
 					if (var40 > 0.0D) {
 						this.ySize = (float)((double)this.ySize + var40 + 0.01D);
 					}
@@ -860,6 +893,7 @@ public abstract class Entity {
 				if (var1 > 1.0F) {
 					var1 = 1.0F;
 				}
+
 				this.func_85030_a("liquid.splash", var1, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
 				float var2 = (float)MathHelper.floor_double(this.boundingBox.minY);
 				int var3;
@@ -878,12 +912,14 @@ public abstract class Entity {
 					this.worldObj.spawnParticle("splash", this.posX + (double)var4, (double)(var2 + 1.0F), this.posZ + (double)var5, this.motionX, this.motionY, this.motionZ);
 				}
 			}
+
 			this.fallDistance = 0.0F;
 			this.inWater = true;
 			this.fire = 0;
 		} else {
 			this.inWater = false;
 		}
+
 		return this.inWater;
 	}
 	
@@ -1509,8 +1545,10 @@ public abstract class Entity {
 		List var10 = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.contract(0.03125D, 0.0D, 0.03125D));
 		if(!var10.isEmpty()) {
 			double var11 = 0.0D;
+
 			for (int var13 = 0; var13 < var10.size(); ++var13) {
 				AxisAlignedBB var14 = (AxisAlignedBB)var10.get(var13);
+
 				if (var14.maxY > var11) {
 					var11 = var14.maxY;
 				}

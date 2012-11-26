@@ -309,7 +309,7 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 			Display.setDisplayMode(new DisplayMode(this.displayWidth, this.displayHeight));
 		}
 
-		Display.setTitle("Minecraft Minecraft 1.4.4");
+		Display.setTitle("Minecraft Minecraft 1.4.5");
 		System.out.println("LWJGL Version: " + Sys.getVersion());
 
 		try {
@@ -1589,7 +1589,7 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 				this.displayGuiScreen(new GuiInventory(this.thePlayer));
 			}
 
-			while (this.gameSettings.keyBindDrop.isPressed()) {
+			while (this.gameSettings.keyBindDrop.isPressed() && var8) {
 				this.thePlayer.dropOneItem();
 			}
 
@@ -1695,6 +1695,7 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 
 					throw new ReportedException(var2);
 				}
+			}
 			}
 
 			this.mcProfiler.endStartSection("animateTick");
