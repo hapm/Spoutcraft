@@ -356,8 +356,9 @@ public class BlockRedstoneWire extends Block {
 	}
 
 	/**
-	 * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube returns true, standard redstone propagation rules will apply instead and this will
-	 * not be called. Args: World, X, Y, Z, side
+	 * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube
+	 * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X, Y,
+	 * Z, side
 	 */
 	public boolean isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
 		if (!this.wiresProvidePower) {

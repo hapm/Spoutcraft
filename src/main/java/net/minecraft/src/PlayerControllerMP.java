@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import org.spoutcraft.api.Spoutcraft; // Spout
-
 import net.minecraft.client.Minecraft;
 
 public class PlayerControllerMP {

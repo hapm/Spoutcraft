@@ -320,7 +320,7 @@ public class EntityFishHook extends Entity {
 							this.ticksCatchable = this.rand.nextInt(30) + 10;
 							this.motionY -= 0.20000000298023224D;
 							this.func_85030_a("random.splash", 0.25F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
-							float var30 = (float) MathHelper.floor_double(this.boundingBox.minY);
+							float var30 = (float)MathHelper.floor_double(this.boundingBox.minY);
 							int var15;
 							float var17;
 							float var31;

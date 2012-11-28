@@ -570,7 +570,9 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 	}
 
 	public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable) {
-		return new EntityVillager(this.worldObj);
+		EntityVillager var2 = new EntityVillager(this.worldObj);
+		var2.initCreature();
+		return var2;
 	}
 
 	public EntityAgeable func_90011_a(EntityAgeable par1EntityAgeable) {

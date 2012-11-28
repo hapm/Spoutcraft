@@ -119,7 +119,7 @@ public class Chunk {
 		}
 
 		Arrays.fill(this.precipitationHeightMap, -999);
-		Arrays.fill(this.blockBiomeArray, (byte) -1);
+		Arrays.fill(this.blockBiomeArray, (byte) - 1);
 
 		// Spout Start
 		spoutChunk = new SpoutcraftChunk(this);

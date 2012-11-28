@@ -117,7 +117,6 @@ public class EntitySlime extends EntityLiving implements IMob {
 			var2 = this.getSlimeSize();
 			this.setSize(0.6F * (float)var2, 0.6F * (float)var2);
 		}
-
 	}
 
 	protected void updateEntityActionState() {

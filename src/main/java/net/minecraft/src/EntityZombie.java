@@ -104,7 +104,7 @@ public class EntityZombie extends EntityMob {
 	 * Set whether this zombie is a villager.
 	 */
 	public void setIsVillager(boolean par1) {
-		this.getDataWatcher().updateObject(13, Byte.valueOf((byte) (par1 ? 1 : 0)));
+		this.getDataWatcher().updateObject(13, Byte.valueOf((byte)(par1 ? 1 : 0)));
 	}
 
 	/**

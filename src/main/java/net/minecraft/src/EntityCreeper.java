@@ -79,7 +79,7 @@ public class EntityCreeper extends EntityMob {
 			par1NBTTagCompound.setBoolean("powered", true);
 		}
 
-		par1NBTTagCompound.setShort("Fuse", (short) this.fuseTime);
+		par1NBTTagCompound.setShort("Fuse", (short)this.fuseTime);
 		par1NBTTagCompound.setByte("ExplosionRadius", (byte)this.explosionRadius);
 	}
 
@@ -178,7 +178,7 @@ public class EntityCreeper extends EntityMob {
 	 * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
 	 */
 	public float getCreeperFlashIntensity(float par1) {
-		return ((float) this.lastActiveTime + (float) (this.timeSinceIgnited - this.lastActiveTime) * par1) / (float) (this.fuseTime - 2);
+		return ((float)this.lastActiveTime + (float)(this.timeSinceIgnited - this.lastActiveTime) * par1) / (float)(this.fuseTime - 2);
 	}
 
 	/**
