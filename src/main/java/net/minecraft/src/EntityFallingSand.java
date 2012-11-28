@@ -111,9 +111,9 @@ public class EntityFallingSand extends Entity {
 					if (this.worldObj.getBlockId(var1, var2, var3) != Block.pistonMoving.blockID) {
 						this.setDead();
 
-						if (!this.isBreakingAnvil && this.worldObj.canPlaceEntityOnSide(this.blockID, var1, var2, var3, true, 1, (Entity) null) && !BlockSand.canFallBelow(this.worldObj, var1, var2 - 1, var3) && this.worldObj.setBlockAndMetadataWithNotify(var1, var2, var3, this.blockID, this.metadata)) {
+						if (!this.isBreakingAnvil && this.worldObj.canPlaceEntityOnSide(this.blockID, var1, var2, var3, true, 1, (Entity)null) && !BlockSand.canFallBelow(this.worldObj, var1, var2 - 1, var3) && this.worldObj.setBlockAndMetadataWithNotify(var1, var2, var3, this.blockID, this.metadata)) {
 							if (Block.blocksList[this.blockID] instanceof BlockSand) {
-								((BlockSand) Block.blocksList[this.blockID]).onFinishFalling(this.worldObj, var1, var2, var3, this.metadata);
+								((BlockSand)Block.blocksList[this.blockID]).onFinishFalling(this.worldObj, var1, var2, var3, this.metadata);
 							}
 						} else if (this.shouldDropItem && !this.isBreakingAnvil) {
 							this.entityDropItem(new ItemStack(this.blockID, 1, Block.blocksList[this.blockID].damageDropped(this.metadata)), 0.0F);
@@ -166,9 +166,9 @@ public class EntityFallingSand extends Entity {
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		par1NBTTagCompound.setByte("Tile", (byte) this.blockID);
-		par1NBTTagCompound.setByte("Data", (byte) this.metadata);
-		par1NBTTagCompound.setByte("Time", (byte) this.fallTime);
+		par1NBTTagCompound.setByte("Tile", (byte)this.blockID);
+		par1NBTTagCompound.setByte("Data", (byte)this.metadata);
+		par1NBTTagCompound.setByte("Time", (byte)this.fallTime);
 		par1NBTTagCompound.setBoolean("DropItem", this.shouldDropItem);
 		par1NBTTagCompound.setBoolean("HurtEntities", this.isAnvil);
 		par1NBTTagCompound.setFloat("FallHurtAmount", this.field_82158_h);

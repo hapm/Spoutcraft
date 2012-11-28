@@ -104,7 +104,6 @@ public class EntityClientPlayerMP extends EntityPlayerSP {
 
 		if (this.ridingEntity != null) {
 			this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.motionX, -999.0D, -999.0D, this.motionZ, this.rotationYaw, this.rotationPitch, this.onGround));
-
 			var13 = false;
 		} else if (var13 && var14) {
 			this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.posX, this.boundingBox.minY, this.posY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround));
@@ -181,7 +180,7 @@ public class EntityClientPlayerMP extends EntityPlayerSP {
 	 */
 	public void closeScreen() {
 		this.sendQueue.addToSendQueue(new Packet101CloseWindow(this.openContainer.windowId));
-		this.inventory.setItemStack((ItemStack) null);
+		this.inventory.setItemStack((ItemStack)null);
 		super.closeScreen();
 	}
 

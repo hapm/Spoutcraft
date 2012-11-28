@@ -7,6 +7,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class TexturePackCustom extends TexturePackImplementation {
+
 	/** ZipFile object used to access the texture pack file's contents. */
 	public ZipFile texturePackZipFile; // Spout HD private -> public
 	// Spout HD Start
@@ -58,7 +59,7 @@ public class TexturePackCustom extends TexturePackImplementation {
 	/**
 	 * Open the texture pack's file and initialize texturePackZipFile
 	 */
-	public void openTexturePackFile() {
+	private void openTexturePackFile() {
 		if (this.texturePackZipFile == null) {
 			try {
 				this.texturePackZipFile = new ZipFile(this.texturePackFile);

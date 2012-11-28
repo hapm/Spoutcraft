@@ -14,16 +14,21 @@ import java.net.PasswordAuthentication;
 
 public class MinecraftApplet extends Applet {
 
+	/** Reference to the applet canvas. */
 	private Canvas mcCanvas;
+
+	/** Reference to the Minecraft object. */
 	private Minecraft mc;
+
+	/** Reference to the Minecraft main thread. */
 	private Thread mcThread = null;
 
 	public void init() {
 		this.mcCanvas = new CanvasMinecraftApplet(this);
 		boolean var1 = "true".equalsIgnoreCase(this.getParameter("fullscreen"));
-
 		this.mc = new MinecraftAppletImpl(this, this.mcCanvas, this, this.getWidth(), this.getHeight(), var1);
 		this.mc.minecraftUri = this.getDocumentBase().getHost();
+
 		if (this.getDocumentBase().getPort() > 0) {
 			this.mc.minecraftUri = this.mc.minecraftUri + ":" + this.getDocumentBase().getPort();
 		}
@@ -54,11 +59,13 @@ public class MinecraftApplet extends Applet {
 		}
 		// Spout End
 
+		this.mc.setDemo("true".equals(this.getParameter("demo")));
+
 		if (this.getParameter("server") != null && this.getParameter("port") != null) {
 			this.mc.setServer(this.getParameter("server"), Integer.parseInt(this.getParameter("port")));
 		}
-		this.mc.hideQuitButton = !"true".equals(this.getParameter("stand-alone"));
 
+		this.mc.hideQuitButton = !"true".equals(this.getParameter("stand-alone"));
 		this.setLayout(new BorderLayout());
 		this.add(this.mcCanvas, "Center");
 		this.mcCanvas.setFocusable(true);
@@ -77,14 +84,12 @@ public class MinecraftApplet extends Applet {
 		if (this.mc != null) {
 			this.mc.isGamePaused = false;
 		}
-
 	}
 
 	public void stop() {
 		if (this.mc != null) {
 			this.mc.isGamePaused = true;
 		}
-
 	}
 
 	public void destroy() {

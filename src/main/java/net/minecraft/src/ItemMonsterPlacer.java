@@ -24,7 +24,7 @@ public class ItemMonsterPlacer extends Item {
 	}
 
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-		EntityEggInfo var3 = (EntityEggInfo) EntityList.entityEggs.get(Integer.valueOf(par1ItemStack.getItemDamage()));
+		EntityEggInfo var3 = (EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(par1ItemStack.getItemDamage()));
 		return var3 != null ? (par2 == 0 ? var3.primaryColor : var3.secondaryColor) : 16777215;
 	}
 
@@ -57,7 +57,7 @@ public class ItemMonsterPlacer extends Item {
 				var12 = 0.5D;
 			}
 
-			if (spawnCreature(par3World, par1ItemStack.getItemDamage(), (double) par4 + 0.5D, (double) par5 + var12, (double) par6 + 0.5D) != null && !par2EntityPlayer.capabilities.isCreativeMode) {
+			if (spawnCreature(par3World, par1ItemStack.getItemDamage(), (double)par4 + 0.5D, (double)par5 + var12, (double)par6 + 0.5D) != null && !par2EntityPlayer.capabilities.isCreativeMode) {
 				--par1ItemStack.stackSize;
 			}
 

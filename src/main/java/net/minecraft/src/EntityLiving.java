@@ -1320,7 +1320,6 @@ public abstract class EntityLiving extends Entity {
 		par1NBTTagCompound.setShort("AttackTime", (short)this.attackTime);
 		par1NBTTagCompound.setBoolean("CanPickUpLoot", this.canPickUpLoot);
 		par1NBTTagCompound.setBoolean("PersistenceRequired", this.persistenceRequired);
-
 		NBTTagList var2 = new NBTTagList();
 
 		for (int var3 = 0; var3 < this.equipment.length; ++var3) {
@@ -1747,7 +1746,6 @@ public abstract class EntityLiving extends Entity {
 		}
 	}
 
-	
 	/**
 	 * Updates the arm swing progress counters and animation progress
 	 */

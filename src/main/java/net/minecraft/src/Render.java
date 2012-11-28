@@ -187,11 +187,11 @@ public abstract class Render {
 				}
 
 				var19.setColorRGBA_F(1.0F, 1.0F, 1.0F, (float)var20);
-				double var22 = (double) par8 + par1Block.getBlockBoundsMinX() + par13;
-				double var24 = (double) par8 + par1Block.getBlockBoundsMaxX() + par13;
-				double var26 = (double) par9 + par1Block.getBlockBoundsMinY() + par15 + 0.015625D;
-				double var28 = (double) par10 + par1Block.getBlockBoundsMinZ() + par17;
-				double var30 = (double) par10 + par1Block.getBlockBoundsMaxZ() + par17;
+				double var22 = (double)par8 + par1Block.getBlockBoundsMinX() + par13;
+				double var24 = (double)par8 + par1Block.getBlockBoundsMaxX() + par13;
+				double var26 = (double)par9 + par1Block.getBlockBoundsMinY() + par15 + 0.015625D;
+				double var28 = (double)par10 + par1Block.getBlockBoundsMinZ() + par17;
+				double var30 = (double)par10 + par1Block.getBlockBoundsMaxZ() + par17;
 				float var32 = (float)((par2 - var22) / 2.0D / (double)par12 + 0.5D);
 				float var33 = (float)((par2 - var24) / 2.0D / (double)par12 + 0.5D);
 				float var34 = (float)((par6 - var28) / 2.0D / (double)par12 + 0.5D);

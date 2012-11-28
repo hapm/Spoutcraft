@@ -479,7 +479,6 @@ public class ItemStack { // Spout final -> gone
 	 * Return a list of strings containing information about the item
 	 */
 	public List getTooltip(EntityPlayer par1EntityPlayer, boolean par2) {
-		
 		ArrayList var3 = new ArrayList();
 		Item var4 = Item.itemsList[this.itemID];
 		String var5 = this.getDisplayName();
@@ -604,8 +603,6 @@ public class ItemStack { // Spout final -> gone
 	public boolean func_82835_x() {
 		return this.getItem().func_82788_x();
 	}
-
-	
 
 	/**
 	 * Return whether this stack is on an item frame.

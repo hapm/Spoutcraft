@@ -1,9 +1,6 @@
 package net.minecraft.src;
 
 import java.util.Random;
-// Spout Start
-import org.spoutcraft.client.config.Configuration;
-// Spout End
 
 public abstract class BlockFluid extends Block {
 	protected BlockFluid(int par1, Material par2Material) {

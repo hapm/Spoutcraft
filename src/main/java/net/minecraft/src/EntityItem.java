@@ -163,7 +163,6 @@ public class EntityItem extends Entity {
 		} else {
 			return false;
 		}
-
 	}
 
 	public void func_70288_d() {
