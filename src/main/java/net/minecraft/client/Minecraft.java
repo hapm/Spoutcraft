@@ -1745,7 +1745,6 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 					throw new ReportedException(var2);
 				}
 			}
-			}
 
 			this.mcProfiler.endStartSection("animateTick");
 
@@ -2382,4 +2381,10 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 	public boolean isFullScreen() {
 		return this.fullscreen;
 	}
+
+	//Spout start
+	public boolean isMultiplayerWorld() {
+		return theWorld != null && theWorld.isRemote;
+	}
+	//Spout end
 }

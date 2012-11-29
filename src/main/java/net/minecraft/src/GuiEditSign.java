@@ -115,14 +115,14 @@ public class GuiEditSign extends GuiScreen {
 			editColumn = entitySign.signText[editLine].length();
 		}
 
-		if (var2 == 205) { // right
+		if (par2 == 205) { // right
 			editColumn++;
 			if (editColumn > entitySign.signText[editLine].length()) {
 				editColumn--;
 			}
 		}
 
-		if (var2 == 203) {// left
+		if (par2 == 203) {// left
 			editColumn--;
 			if (editColumn < 0) {
 				editColumn = 0;
@@ -165,14 +165,14 @@ public class GuiEditSign extends GuiScreen {
 			if (line.length() - endColumnStart > 0) {
 				after = line.substring(endColumnStart, line.length());
 			}
-			before += var1;
+			before += par1;
 			line = before + after;
 			entitySign.signText[editLine] = line;
 			endColumnStart++;
 			editColumn = endColumnStart;
 		}
 
-		if (var2 == 211) // del
+		if (par2 == 211) // del
 		{
 			String line = entitySign.signText[editLine];
 			String before = line.substring(0, editColumn);

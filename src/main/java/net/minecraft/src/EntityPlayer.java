@@ -328,11 +328,6 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 		}
 
 		if (par1ItemStack.getItemUseAction() == EnumAction.eat) {
-			if (par1ItemStack.getItemUseAction() == EnumAction.drink) {
-			this.func_85030_a("random.drink", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
-		}
-
-		if (par1ItemStack.getItemUseAction() == EnumAction.eat) {
 			for (int var3 = 0; var3 < par2; ++var3) {
 				Vec3 var4 = this.worldObj.getWorldVec3Pool().getVecFromPool(((double)this.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
 				var4.rotateAroundX(-this.rotationPitch * (float)Math.PI / 180.0F);
@@ -727,10 +722,7 @@ public abstract class EntityPlayer extends EntityLiving implements ICommandSende
 	 */
 	public void displayGUIChest(IInventory par1IInventory) {}
 
-	/**
-	 * Displays the GUI for interacting with an anvil.
-	 */
-	public void displayGUIAnvil(int par1, int par2, int par3) {}
+	public void displayGUIEnchantment(int par1, int par2, int par3) {}
 
 	/**
 	 * Displays the GUI for interacting with an anvil.

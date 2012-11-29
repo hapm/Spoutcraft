@@ -1692,6 +1692,9 @@ public abstract class World implements IBlockAccess {
 		this.scanningTileEntities = false;
 
 		if (!this.entityRemoval.isEmpty()) {
+			this.loadedTileEntityList.removeAll(this.entityRemoval);
+			this.entityRemoval.clear();
+		}
 
 		this.theProfiler.endStartSection("pendingTileEntities");
 

@@ -923,9 +923,10 @@ public class RenderGlobal implements IWorldAccess {
 			float var10;
 			float var11;
 			float var12;
-
+			// Spout Start
 			if (var24 != null && Configuration.isSky()) {
 				Shaders.glDisableWrapper(GL11.GL_TEXTURE_2D);
+				// Spout End
 				GL11.glShadeModel(GL11.GL_SMOOTH);
 				GL11.glPushMatrix();
 				GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
@@ -1713,6 +1714,12 @@ public class RenderGlobal implements IWorldAccess {
 	}
 
 	public EntityFX func_72726_b(String par1Str, double par2, double par4, double par6, double par8, double par10, double par12) {
+		// Spout Start
+		return func_40193_b(par1Str, par2, par4, par6, par8, par10, par12, 16.0);
+	}
+
+	public EntityFX func_40193_b(String par1Str, double par2, double par4, double par6, double par8, double par10, double par12, double var22) { 
+		// Spout End
 		if (this.mc != null && this.mc.renderViewEntity != null && this.mc.effectRenderer != null) {
 			int var14 = this.mc.gameSettings.particleSetting;
 
@@ -1741,6 +1748,7 @@ public class RenderGlobal implements IWorldAccess {
 				return (EntityFX)var21;
 			} else {
 				// Spout Start
+				//double var22 = 16.0D; // promoted to parameter
 				if (!org.spoutcraft.client.config.Configuration.isFancyParticles()) {
 					var22 = 6D;
 				}
