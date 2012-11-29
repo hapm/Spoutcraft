@@ -62,13 +62,13 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 		if (par1Slot != null) {
 			if (par1Slot == this.field_74235_v && var5) {
 				for (int var10 = 0; var10 < this.mc.thePlayer.inventoryContainer.getInventory().size(); ++var10) {
-					this.mc.playerController.sendSlotPacket((ItemStack) null, var10);
+					this.mc.playerController.sendSlotPacket((ItemStack)null, var10);
 				}
 			} else if (selectedTabIndex == CreativeTabs.tabInventory.getTabIndex()) {
 				if (par1Slot == this.field_74235_v) {
 					this.mc.thePlayer.inventory.setItemStack((ItemStack)null);
 				} else {
-					this.mc.thePlayer.inventoryContainer.slotClick(SlotCreativeInventory.func_75240_a((SlotCreativeInventory) par1Slot).slotNumber, par3, par4, this.mc.thePlayer);
+					this.mc.thePlayer.inventoryContainer.slotClick(SlotCreativeInventory.func_75240_a((SlotCreativeInventory)par1Slot).slotNumber, par3, par4, this.mc.thePlayer);
 					this.mc.thePlayer.inventoryContainer.updateCraftingResults();
 				}
 			} else if (par1Slot.inventory == inventory) {

@@ -74,7 +74,7 @@ public abstract class WorldProvider {
 	 * Returns a new chunk provider which generates chunks for this world
 	 */
 	public IChunkProvider createChunkGenerator() {
-		return (IChunkProvider) (this.terrainType == WorldType.FLAT ? new ChunkProviderFlat(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.field_82913_c) : new ChunkProviderGenerate(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().isMapFeaturesEnabled()));
+		return (IChunkProvider)(this.terrainType == WorldType.FLAT ? new ChunkProviderFlat(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.field_82913_c) : new ChunkProviderGenerate(this.worldObj, this.worldObj.getSeed(), this.worldObj.getWorldInfo().isMapFeaturesEnabled()));
 	}
 
 	/**
@@ -152,8 +152,8 @@ public abstract class WorldProvider {
 		if (var3 > 1.0F) {
 			var3 = 1.0F;
 		}
-		// Spout Start
 
+		// Spout Start
 		float var4;
 		float var5;
 		float var6;

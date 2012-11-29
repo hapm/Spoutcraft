@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-import org.spoutcraft.client.entity.CraftEnderman;
+import org.spoutcraft.client.entity.CraftEnderman; // Spout
 
 public class EntityEnderman extends EntityMob {
 	private static boolean[] carriableBlocks = new boolean[256];

@@ -251,7 +251,7 @@ public class GuiMultiplayer extends GuiScreen {
 					}
 				}
 			} else if (par1 == 13) {
-				this.actionPerformed((GuiButton) this.controlList.get(2));
+				this.actionPerformed((GuiButton)this.controlList.get(2));
 			} else {
 				super.keyTyped(par1, par2);
 			}
@@ -284,7 +284,7 @@ public class GuiMultiplayer extends GuiScreen {
 			par1 -= this.internetServerList.countServers();
 
 			if (par1 < this.listofLanServers.size()) {
-				LanServer var2 = (LanServer) this.listofLanServers.get(par1);
+				LanServer var2 = (LanServer)this.listofLanServers.get(par1);
 				this.connectToServer(new ServerData(var2.getServerMotd(), var2.getServerIpPort()));
 			}
 		}

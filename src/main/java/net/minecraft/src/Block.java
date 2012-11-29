@@ -1,12 +1,12 @@
 package net.minecraft.src;
 
+import gnu.trove.map.hash.TIntFloatHashMap; // Spout
+
+import java.util.ArrayList; // Spout
 import java.util.List;
 import java.util.Random;
 
 // Spout start
-import gnu.trove.map.hash.TIntFloatHashMap;
-
-import java.util.ArrayList;
 import org.spoutcraft.client.block.SpoutcraftChunk;
 import org.spoutcraft.api.entity.ActivePlayer;
 import org.spoutcraft.api.material.CustomBlock;
@@ -33,7 +33,6 @@ public class Block {
 	public static final StepSound soundSnowFootstep = new StepSound("snow", 1.0F, 1.0F);
 	public static final StepSound soundLadderFootstep = new StepSoundSand("ladder", 1.0F, 1.0F);
 	public static final StepSound soundAnvilFootstep = new StepSoundAnvil("anvil", 0.3F, 1.0F);
-
 
 	/** List of ly/ff (BlockType) containing the already registered blocks. */
 	public static final Block[] blocksList = new Block[4096];
@@ -459,6 +458,9 @@ public class Block {
 		// Spout End
 	}
 
+	/**
+	 * Goes straight to getLightBrightnessForSkyBlocks for Blocks, does some fancy computing for Fluids
+	 */
 	public int getMixedBrightnessForBlock(IBlockAccess par1IBlockAccess, int x, int y, int z) {
 		// Spout Start
 		int light = lightValue[par1IBlockAccess.getBlockId(x, y, z)];
@@ -470,7 +472,7 @@ public class Block {
 				if (block != null) {
 					light = block.getLightLevel();
 				}
-	}
+			}
 		}
 		return par1IBlockAccess.getLightBrightnessForSkyBlocks(x, y, z, light);
 		// Spout End
@@ -704,8 +706,9 @@ public class Block {
 	public int damageDropped(int par1) {
 		return 0;
 	}
+	
 	// Spout start
-	public float getHardness() { // Spout removed random params, see getBlockHardness
+	public float getHardness() { // getBlockHardness version with removed random params
  		return this.blockHardness;
  	}
 	// Spout end
@@ -963,8 +966,9 @@ public class Block {
 	}
 
 	/**
-	 * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube returns true, standard redstone propagation rules will apply instead and this will
-	 * not be called. Args: World, X, Y, Z, side
+	 * Returns true if the block is emitting indirect/weak redstone power on the specified side. If isBlockNormalCube
+	 * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X, Y,
+	 * Z, side
 	 */
 	public boolean isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
 		return false;

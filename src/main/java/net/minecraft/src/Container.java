@@ -83,7 +83,7 @@ public abstract class Container {
 				this.inventoryItemStacks.set(var1, var3);
 
 				for (int var4 = 0; var4 < this.crafters.size(); ++var4) {
-					((ICrafting) this.crafters.get(var4)).sendSlotContents(this, var1, var3);
+					((ICrafting)this.crafters.get(var4)).sendSlotContents(this, var1, var3);
 				}
 			}
 		}
@@ -273,7 +273,7 @@ public abstract class Container {
 					var7.putStack(var8);
 				}
 			}
-		} else if (par3 == 3 && par4EntityPlayer.capabilities.isCreativeMode && var6.getItemStack() == null && par1 > 0) {
+		} else if (par3 == 3 && par4EntityPlayer.capabilities.isCreativeMode && var6.getItemStack() == null && par1 >= 0) {
 			var7 = (Slot)this.inventorySlots.get(par1);
 
 			if (var7 != null && var7.getHasStack()) {

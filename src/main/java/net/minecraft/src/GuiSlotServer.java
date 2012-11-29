@@ -71,7 +71,7 @@ class GuiSlotServer extends GuiSlot {
 	}
 
 	private void func_77248_b(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {
-		LanServer var6 = (LanServer) GuiMultiplayer.getListOfLanServers(this.parentGui).get(par1 - GuiMultiplayer.getInternetServerList(this.parentGui).countServers());
+		LanServer var6 = (LanServer)GuiMultiplayer.getListOfLanServers(this.parentGui).get(par1 - GuiMultiplayer.getInternetServerList(this.parentGui).countServers());
 		this.parentGui.drawString(this.parentGui.fontRenderer, StatCollector.translateToLocal("lanServer.title"), par2 + 2, par3 + 1, 16777215);
 		this.parentGui.drawString(this.parentGui.fontRenderer, var6.getServerMotd(), par2 + 2, par3 + 12, 8421504);
 

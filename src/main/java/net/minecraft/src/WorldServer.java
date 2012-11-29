@@ -340,7 +340,7 @@ public class WorldServer extends World {
 
 		if (this.checkChunksExist(par1 - var8, par2 - var8, par3 - var8, par1 + var8, par2 + var8, par3 + var8)) {
 			if (par4 > 0) {
-				var7.setScheduledTime((long) par5 + this.worldInfo.getWorldTotalTime());
+				var7.setScheduledTime((long)par5 + this.worldInfo.getWorldTotalTime());
 				var7.func_82753_a(par6);
 			}
 
@@ -358,7 +358,7 @@ public class WorldServer extends World {
 		NextTickListEntry var6 = new NextTickListEntry(par1, par2, par3, par4);
 
 		if (par4 > 0) {
-			var6.setScheduledTime((long) par5 + this.worldInfo.getWorldTotalTime());
+			var6.setScheduledTime((long)par5 + this.worldInfo.getWorldTotalTime());
 		}
 
 		if (!this.field_73064_N.contains(var6)) {
@@ -506,10 +506,9 @@ public class WorldServer extends World {
 	 */
 	public List getAllTileEntityInBox(int par1, int par2, int par3, int par4, int par5, int par6) {
 		ArrayList var7 = new ArrayList();
-		Iterator var8 = this.loadedTileEntityList.iterator();
 
-		while (var8.hasNext()) {
-			TileEntity var9 = (TileEntity)var8.next();
+		for (int var8 = 0; var8 < this.loadedTileEntityList.size(); ++var8) {
+			TileEntity var9 = (TileEntity)this.loadedTileEntityList.get(var8);
 
 			if (var9.xCoord >= par1 && var9.yCoord >= par2 && var9.zCoord >= par3 && var9.xCoord < par4 && var9.yCoord < par5 && var9.zCoord < par6) {
 				var7.add(var9);
@@ -723,7 +722,7 @@ public class WorldServer extends World {
 			EntityPlayer var13 = (EntityPlayer)var12.next();
 
 			if (var13.getDistanceSq(par2, par4, par6) < 4096.0D) {
-				((EntityPlayerMP) var13).playerNetServerHandler.sendPacketToPlayer(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3) var11.func_77277_b().get(var13)));
+				((EntityPlayerMP)var13).playerNetServerHandler.sendPacketToPlayer(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3)var11.func_77277_b().get(var13)));
 			}
 		}
 

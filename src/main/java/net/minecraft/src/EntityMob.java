@@ -3,7 +3,6 @@ package net.minecraft.src;
 import org.spoutcraft.client.entity.CraftMonster; // Spout
 
 public abstract class EntityMob extends EntityCreature implements IMob {
-
 	public EntityMob(World par1World) {
 		super(par1World);
 		this.experienceValue = 5;

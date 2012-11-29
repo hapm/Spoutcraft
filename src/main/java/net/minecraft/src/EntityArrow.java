@@ -99,21 +99,21 @@ public class EntityArrow extends Entity implements IProjectile {
 	 */
 	public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8) {
 		float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-		par1 /= (double) var9;
-		par3 /= (double) var9;
-		par5 /= (double) var9;
-		par1 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par3 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par5 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par1 *= (double) par7;
-		par3 *= (double) par7;
-		par5 *= (double) par7;
+		par1 /= (double)var9;
+		par3 /= (double)var9;
+		par5 /= (double)var9;
+		par1 += this.rand.nextGaussian() * 0.007499999832361937D * (double)par8;
+		par3 += this.rand.nextGaussian() * 0.007499999832361937D * (double)par8;
+		par5 += this.rand.nextGaussian() * 0.007499999832361937D * (double)par8;
+		par1 *= (double)par7;
+		par3 *= (double)par7;
+		par5 *= (double)par7;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
 		float var10 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, (double) var10) * 180.0D / Math.PI);
+		this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(par1, par5) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(par3, (double)var10) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 
@@ -235,7 +235,6 @@ public class EntityArrow extends Entity implements IProjectile {
 
 			if (var4 != null) {
 				if (var4.entityHit != null) {
-					
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 					int var23 = MathHelper.ceiling_double_int((double)var20 * this.damage);
 

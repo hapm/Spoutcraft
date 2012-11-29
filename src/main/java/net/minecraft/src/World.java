@@ -332,7 +332,6 @@ public abstract class World implements IBlockAccess {
 		return Block.blocksList[var4] != null ? Block.blocksList[var4].getRenderType() : -1;
 	}
 
-
 	/**
 	 * Returns whether a block exists at world coordinates x, y, z
 	 */
@@ -542,11 +541,12 @@ public abstract class World implements IBlockAccess {
 	}
 
 	/**
-	 * On the client, re-renders the block. On the server, sends the block to the client (which will re-render it), including the tile entity description packet if applicable. Args: x, y, z
+	 * On the client, re-renders the block. On the server, sends the block to the client (which will re-render it),
+	 * including the tile entity description packet if applicable. Args: x, y, z
 	 */
 	public void markBlockForUpdate(int par1, int par2, int par3) {
 		for (int var4 = 0; var4 < this.worldAccesses.size(); ++var4) {
-			((IWorldAccess) this.worldAccesses.get(var4)).markBlockForUpdate(par1, par2, par3);
+			((IWorldAccess)this.worldAccesses.get(var4)).markBlockForUpdate(par1, par2, par3);
 		}
 	}
 
@@ -583,16 +583,17 @@ public abstract class World implements IBlockAccess {
 	 */
 	public void markBlockForRenderUpdate2(int par1, int par2, int par3) {
 		for (int var4 = 0; var4 < this.worldAccesses.size(); ++var4) {
-			((IWorldAccess) this.worldAccesses.get(var4)).markBlockRangeForRenderUpdate(par1, par2, par3, par1, par2, par3);
+			((IWorldAccess)this.worldAccesses.get(var4)).markBlockRangeForRenderUpdate(par1, par2, par3, par1, par2, par3);
 		}
 	}
 
 	/**
-	 * On the client, re-renders all blocks in this range, inclusive. On the server, does nothing. Args: min x, min y, min z, max x, max y, max z
+	 * On the client, re-renders all blocks in this range, inclusive. On the server, does nothing. Args: min x, min y, min
+	 * z, max x, max y, max z
 	 */
 	public void markBlockRangeForRenderUpdate(int par1, int par2, int par3, int par4, int par5, int par6) {
 		for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7) {
-			((IWorldAccess) this.worldAccesses.get(var7)).markBlockRangeForRenderUpdate(par1, par2, par3, par4, par5, par6);
+			((IWorldAccess)this.worldAccesses.get(var7)).markBlockRangeForRenderUpdate(par1, par2, par3, par4, par5, par6);
 		}
 	}
 
@@ -845,7 +846,7 @@ public abstract class World implements IBlockAccess {
 						var6.setLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15, par5);
 
 						for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7) {
-							((IWorldAccess) this.worldAccesses.get(var7)).markBlockForRenderUpdate(par2, par3, par4);
+							((IWorldAccess)this.worldAccesses.get(var7)).markBlockForRenderUpdate(par2, par3, par4);
 						}
 					}
 				}
@@ -858,7 +859,7 @@ public abstract class World implements IBlockAccess {
 	 */
 	public void markBlockForRenderUpdate(int par1, int par2, int par3) {
 		for (int var4 = 0; var4 < this.worldAccesses.size(); ++var4) {
-			((IWorldAccess) this.worldAccesses.get(var4)).markBlockForRenderUpdate(par1, par2, par3);
+			((IWorldAccess)this.worldAccesses.get(var4)).markBlockForRenderUpdate(par1, par2, par3);
 		}
 	}
 
@@ -1090,7 +1091,7 @@ public abstract class World implements IBlockAccess {
 			for (int var5 = 0; var5 < this.worldAccesses.size(); ++var5) {
 				((IWorldAccess)this.worldAccesses.get(var5)).func_85102_a(par1EntityPlayer, par2Str, par1EntityPlayer.posX, par1EntityPlayer.posY - (double)par1EntityPlayer.yOffset, par1EntityPlayer.posZ, par3, par4);
 			}
-	}
+		}
 	}
 
 	/**
@@ -1619,8 +1620,8 @@ public abstract class World implements IBlockAccess {
 			if (!var2.isDead) {
 				try {
 					this.updateEntity(var2);
-				} catch (Throwable var7) {
-					var4 = CrashReport.func_85055_a(var7, "Ticking entity");
+				} catch (Throwable var6) {
+					var4 = CrashReport.func_85055_a(var6, "Ticking entity");
 					var5 = var4.func_85058_a("Entity being ticked");
 
 					if (var2 == null) {
@@ -1661,8 +1662,8 @@ public abstract class World implements IBlockAccess {
 			if (!var9.isInvalid() && var9.func_70309_m() && this.blockExists(var9.xCoord, var9.yCoord, var9.zCoord)) {
 				try {
 					var9.updateEntity();
-				} catch (Throwable var6) {
-					var4 = CrashReport.func_85055_a(var6, "Ticking tile entity");
+				} catch (Throwable var7) {
+					var4 = CrashReport.func_85055_a(var7, "Ticking tile entity");
 					var5 = var4.func_85058_a("Tile entity being ticked");
 
 					if (var9 == null) {

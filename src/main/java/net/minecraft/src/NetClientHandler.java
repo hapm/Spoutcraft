@@ -164,6 +164,9 @@ public class NetClientHandler extends NetHandler {
 		}
 	}
 
+	/**
+	 * Encode the given string for insertion into a URL
+	 */
 	private static String urlEncode(String par0Str) throws IOException {
 		return URLEncoder.encode(par0Str, "UTF-8");
 	}
@@ -175,7 +178,7 @@ public class NetClientHandler extends NetHandler {
 	public void handleLogin(Packet1Login par1Packet1Login) {
 		this.mc.playerController = new PlayerControllerMP(this.mc, this);
 		this.mc.statFileWriter.readStat(StatList.joinMultiplayerStat, 1);
-		this.worldClient = new WorldClient(this, new WorldSettings(0L, par1Packet1Login.gameType, false, par1Packet1Login.field_73560_c, par1Packet1Login.terrainType), par1Packet1Login.dimension, par1Packet1Login.difficultySetting, this.mc.mcProfiler);
+		this.worldClient = new WorldClient(this, new WorldSettings(0L, par1Packet1Login.gameType, false, par1Packet1Login.hardcoreMode, par1Packet1Login.terrainType), par1Packet1Login.dimension, par1Packet1Login.difficultySetting, this.mc.mcProfiler);
 		this.worldClient.isRemote = true;
 		this.mc.loadWorld(this.worldClient);
 		this.mc.thePlayer.dimension = par1Packet1Login.dimension;
@@ -219,6 +222,7 @@ public class NetClientHandler extends NetHandler {
 			if (var10 instanceof EntityPlayer) {
 				var8 = new EntityFishHook(this.worldClient, var2, var4, var6, (EntityPlayer)var10);
 			}
+
 			par1Packet23VehicleSpawn.throwerEntityId = 0;
 		} else if (par1Packet23VehicleSpawn.type == 60) {
 			var8 = new EntityArrow(this.worldClient, var2, var4, var6);
@@ -444,9 +448,11 @@ public class NetClientHandler extends NetHandler {
 			this.worldClient.removeEntityFromWorld(par1Packet29DestroyEntity.entityId[var2]);
 		}
 	}
+
 	// Spout Start
 	private boolean cachePacketSent = false;
 	// Spout End
+
 	public void handleFlying(Packet10Flying par1Packet10Flying) {
 		// Spout Start
 		sendCacheSetupPacket();
@@ -1071,11 +1077,11 @@ public class NetClientHandler extends NetHandler {
 			if (var4 == 0) {
 				this.mc.displayGuiScreen(new GuiScreenDemo());
 			} else if (var4 == 101) {
-				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.movement", new Object[] { Keyboard.getKeyName(var5.keyBindForward.keyCode), Keyboard.getKeyName(var5.keyBindLeft.keyCode), Keyboard.getKeyName(var5.keyBindBack.keyCode), Keyboard.getKeyName(var5.keyBindRight.keyCode) });
+				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.movement", new Object[] {Keyboard.getKeyName(var5.keyBindForward.keyCode), Keyboard.getKeyName(var5.keyBindLeft.keyCode), Keyboard.getKeyName(var5.keyBindBack.keyCode), Keyboard.getKeyName(var5.keyBindRight.keyCode)});
 			} else if (var4 == 102) {
-				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.jump", new Object[] { Keyboard.getKeyName(var5.keyBindJump.keyCode) });
+				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.jump", new Object[] {Keyboard.getKeyName(var5.keyBindJump.keyCode)});
 			} else if (var4 == 103) {
-				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.inventory", new Object[] { Keyboard.getKeyName(var5.keyBindInventory.keyCode) });
+				this.mc.ingameGUI.getChatGUI().addTranslatedMessage("demo.help.inventory", new Object[] {Keyboard.getKeyName(var5.keyBindInventory.keyCode)});
 			}
 		}
 	}
@@ -1210,7 +1216,7 @@ public class NetClientHandler extends NetHandler {
 				GuiScreen var4 = this.mc.currentScreen;
 
 				if (var4 != null && var4 instanceof GuiMerchant && var9 == this.mc.thePlayer.openContainer.windowId) {
-					IMerchant var5 = ((GuiMerchant) var4).getIMerchant();
+					IMerchant var5 = ((GuiMerchant)var4).getIMerchant();
 					MerchantRecipeList var6 = MerchantRecipeList.readRecipiesFromStream(var8);
 					var5.setRecipes(var6);
 				}

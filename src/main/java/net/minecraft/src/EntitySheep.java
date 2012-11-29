@@ -5,7 +5,6 @@ import java.util.Random;
 import org.spoutcraft.client.entity.CraftSheep; // Spout
 
 public class EntitySheep extends EntityAnimal {
-
 	private final InventoryCrafting field_90016_e = new InventoryCrafting(new ContainerSheep(this), 2, 1);
 
 	/**
@@ -183,7 +182,7 @@ public class EntitySheep extends EntityAnimal {
 	 * Plays step sound at given x, y, z for the entity
 	 */
 	protected void playStepSound(int par1, int par2, int par3, int par4) {
-			this.func_85030_a("mob.sheep.step", 0.15F, 1.0F);
+		this.func_85030_a("mob.sheep.step", 0.15F, 1.0F);
 	}
 
 	public int getFleeceColor() {
@@ -224,7 +223,7 @@ public class EntitySheep extends EntityAnimal {
 	}
 
 	public EntitySheep func_90015_b(EntityAgeable par1EntityAgeable) {
-		EntitySheep var2 = (EntitySheep) par1EntityAgeable;
+		EntitySheep var2 = (EntitySheep)par1EntityAgeable;
 		EntitySheep var3 = new EntitySheep(this.worldObj);
 		int var4 = this.func_90014_a(this, var2);
 		var3.setFleeceColor(15 - var4);
@@ -261,7 +260,7 @@ public class EntitySheep extends EntityAnimal {
 		int var4 = this.func_90013_b(par2EntityAnimal);
 		this.field_90016_e.getStackInSlot(0).setItemDamage(var3);
 		this.field_90016_e.getStackInSlot(1).setItemDamage(var4);
-		ItemStack var5 = CraftingManager.getInstance().findMatchingRecipe(this.field_90016_e, ((EntitySheep) par1EntityAnimal).worldObj);
+		ItemStack var5 = CraftingManager.getInstance().findMatchingRecipe(this.field_90016_e, ((EntitySheep)par1EntityAnimal).worldObj);
 		int var6;
 
 		if (var5 != null && var5.getItem().shiftedIndex == Item.dyePowder.shiftedIndex) {
@@ -274,7 +273,7 @@ public class EntitySheep extends EntityAnimal {
 	}
 
 	private int func_90013_b(EntityAnimal par1EntityAnimal) {
-		return 15 - ((EntitySheep) par1EntityAnimal).getFleeceColor();
+		return 15 - ((EntitySheep)par1EntityAnimal).getFleeceColor();
 	}
 
 	public EntityAgeable func_90011_a(EntityAgeable par1EntityAgeable) {
