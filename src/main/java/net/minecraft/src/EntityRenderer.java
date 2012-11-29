@@ -1116,7 +1116,9 @@ public class EntityRenderer {
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_CULL_FACE);
 			GL11.glDisable(GL11.GL_BLEND);
-
+			
+			}
+			// Spout
 			if (this.cameraZoom == 1.0D && var4 instanceof EntityPlayer && !this.mc.gameSettings.hideGUI && this.mc.objectMouseOver != null && !var4.isInsideOfMaterial(Material.water)) {
 				var17 = (EntityPlayer)var4;
 				GL11.glDisable(GL11.GL_ALPHA_TEST);

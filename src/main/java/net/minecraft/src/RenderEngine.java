@@ -247,11 +247,11 @@ public class RenderEngine {
 			GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
 		}
 
-		int var3 = par1BufferedImage.getWidth();
-		int var4 = par1BufferedImage.getHeight();
-		int[] var5 = new int[var3 * var4];
-		byte[] var6 = new byte[var3 * var4 * 4];
 			// Spout Start
+			int textureWidth = par1BufferedImage.getWidth();
+			int textureHeight = par1BufferedImage.getHeight();
+			int[] texData = new int[textureWidth * textureHeight];
+			byte[] texColors = new byte[textureWidth * textureHeight * 4];
 			//Performance reasons
 			boolean handled = false;
 			try {
@@ -271,14 +271,15 @@ public class RenderEngine {
 			int var9;
 			int var10;
 			int var11;
+			int var12;
 			int var13;
 			int var14;
 
-		for (int var7 = 0; var7 < var5.length; ++var7) {
-			var8 = var5[var7] >> 24 & 255;
-			var9 = var5[var7] >> 16 & 255;
-			var10 = var5[var7] >> 8 & 255;
-			var11 = var5[var7] & 255;
+		for (int var7 = 0; var7 < texData.length; ++var7) {
+			var8 = texData[var7] >> 24 & 255;
+			var9 = texData[var7] >> 16 & 255;
+			var10 = texData[var7] >> 8 & 255;
+			var11 = texData[var7] & 255;
 
 			if (this.options != null && this.options.anaglyph) {
 				var12 = (var9 * 30 + var10 * 59 + var11 * 11) / 100;
@@ -289,14 +290,15 @@ public class RenderEngine {
 				var11 = var14;
 			}
 
-			var6[var7 * 4 + 0] = (byte)var9;
-			var6[var7 * 4 + 1] = (byte)var10;
-			var6[var7 * 4 + 2] = (byte)var11;
-			var6[var7 * 4 + 3] = (byte)var8;
+			texColors[var7 * 4 + 0] = (byte)var9;
+			texColors[var7 * 4 + 1] = (byte)var10;
+			texColors[var7 * 4 + 2] = (byte)var11;
+			texColors[var7 * 4 + 3] = (byte)var8;
 		}
+		//Spout End
 
 		this.imageData = TextureUtils.getByteBuffer(this.imageData, texColors);
-		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, var3, var4, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, this.imageData);
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, textureWidth, textureHeight, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, this.imageData);
 		}
 		// Spout HD End
 	}

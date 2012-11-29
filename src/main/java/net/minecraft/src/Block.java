@@ -619,10 +619,32 @@ public class Block {
 	 * Gets the hardness of block at the given coordinates in the given world, relative to the ability of the given
 	 * EntityPlayer.
 	 */
-	public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World par2World, int par3, int par4, int par5) {
-		float var6 = this.getBlockHardness(par2World, par3, par4, par5);
-		return var6 < 0.0F ? 0.0F : (!par1EntityPlayer.canHarvestBlock(this) ? 1.0F / var6 / 100.0F : par1EntityPlayer.getCurrentPlayerStrVsBlock(this) / var6 / 30.0F);
+	// Spout Start
+	public final float getPlayerRelativeBlockHardness(EntityPlayer entityhuman) {
+		if (entityhuman instanceof EntityPlayerSP) {
+			ActivePlayer player = (ActivePlayer) ((EntityPlayerSP) entityhuman).spoutEntity;
+			FixedLocation target = player.getLastClickedLocation();
+			if (target != null) {
+
+				org.spoutcraft.api.material.Block b = target.getBlock().getType();
+				if (b instanceof CustomBlock) {
+					return b.getHardness() < 0.0F ? 0.0F : (!entityhuman.canHarvestBlock(this) ? 1.0F / b.getHardness() / 100.0F : entityhuman.getCurrentPlayerStrVsBlock(this) / b.getHardness() / 30.0F);
+				}
+
+				int x = (int) target.getX();
+				int y = (int) target.getY();
+				int z = (int) target.getZ();
+				int index = ((x & 0xF) << player.getWorld().getXBitShifts()) | ((z & 0xF) << player.getWorld().getZBitShifts()) | (y & (player.getWorld().getMaxHeight() - 1));
+				SpoutcraftChunk chunk = (SpoutcraftChunk) target.getWorld().getChunkAt(target);
+				TIntFloatHashMap hardnessOverrides = chunk.hardnessOverrides;
+				if (hardnessOverrides.containsKey(index)) {
+					return hardnessOverrides.get(index);
+				}
+			}
+		}
+		return this.blockHardness < 0.0F ? 0.0F : (!entityhuman.canHarvestBlock(this) ? 1.0F / this.blockHardness / 100.0F : entityhuman.getCurrentPlayerStrVsBlock(this) / this.blockHardness / 30.0F);
 	}
+	// Spout End
 
 	/**
 	 * Drops the specified block items

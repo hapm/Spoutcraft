@@ -1632,7 +1632,7 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 				this.displayGuiScreen(new GuiInventory(this.thePlayer));
 			}
 
-			while (this.gameSettings.keyBindDrop.isPressed()) {
+			while (this.gameSettings.keyBindDrop.isPressed() && var8) {
 				this.thePlayer.dropOneItem();
 			}
 
@@ -2381,4 +2381,10 @@ public abstract class Minecraft implements Runnable, IPlayerUsage {
 	public boolean isFullScreen() {
 		return this.fullscreen;
 	}
+
+	//Spout start
+	public boolean isMultiplayerWorld() {
+		return theWorld != null && theWorld.isRemote;
+	}
+	//Spout end
 }

@@ -208,19 +208,19 @@ public class RenderManager {
 
 				try {
 					var10.doRender(par1Entity, par2, par4, par6, par8, par9);
-				} catch(NullPointerException ignore) { } // Spout Ignore NullPointerExceptions, the old way
+				} catch(NullPointerException ignore) { // Spout Ignore NullPointerExceptions, the old way
 				} catch (Throwable var16) {
 					throw new ReportedException(CrashReport.func_85055_a(var16, "Rendering entity in world"));
 				}
 
 				try {
 					var10.doRenderShadowAndFire(par1Entity, par2, par4, par6, par8, par9);
-				} catch(NullPointerException ignore) { } // Spout Ignore NullPointerExceptions, the old way
+				} catch(NullPointerException ignore) { // Spout Ignore NullPointerExceptions, the old way
 				} catch (Throwable var15) {
 					throw new ReportedException(CrashReport.func_85055_a(var15, "Post-rendering entity in world"));
 				}
 			}
-		} catch(NullPointerException ignore) { } // Spout Ignore NullPointerExceptions, the old way
+		} catch(NullPointerException ignore) { // Spout Ignore NullPointerExceptions, the old way
 		} catch (Throwable var18) {
 			CrashReport var12 = CrashReport.func_85055_a(var18, "Rendering entity in world");
 			CrashReportCategory var13 = var12.func_85058_a("Entity being rendered");

@@ -34,7 +34,7 @@ public class FontRenderer {
 	/**
 	 * Array of GL texture ids for loaded glyph_XX.png images. Indexed by Unicode block (group of 256 chars).
 	 */
-	private final int[] glyphTextureName = new int[256];
+	private int[] glyphTextureName = new int[256]; // Spout removed final
 
 	/**
 	 * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for drop
@@ -48,7 +48,7 @@ public class FontRenderer {
 	private int boundTextureName;
 
 	/** The RenderEngine used to load and setup glyph textures. */
-	private final RenderEngine renderEngine;
+	private RenderEngine renderEngine; // Spout final removed
 
 	/** Current X coordinate at which to draw the next character. */
 	private float posX;
@@ -59,13 +59,13 @@ public class FontRenderer {
 	/**
 	 * If true, strings should be rendered with Unicode fonts instead of the default.png font
 	 */
-	private boolean unicodeFlag;
+	public boolean unicodeFlag; // Spout private -> public
 
 	/**
 	 * If true, the Unicode Bidirectional Algorithm should be run before rendering any string.
 	 */
 	private boolean bidiFlag;
-	public float[] charWidthf;
+	public float[] charWidthf; // Spout
 
 	/** Used to specify new red value for the current color. */
 	private float red;
@@ -132,6 +132,7 @@ public class FontRenderer {
 		int var7 = var5.getHeight();
 		int[] var8 = new int[var19 * var7];
 		var5.getRGB(0, 0, var19, var7, var8, 0, var19);
+		this.charWidthf = FontUtils.computeCharWidths(par2Str, var5, var8, this.charWidth); // Spout
 		int var9 = 0;
 		int var10;
 		int var11;
@@ -442,7 +443,7 @@ public class FontRenderer {
 						currentAlpha = defaultAlpha * 10 / 7; // Spout AlphaText - transparent shadows improve readability for black text.
 					}
 
-					currentColor = Colorizer.colorizeText(this.colorCode[var10], var10); // Spout AlphaText - sets current Colour (but will discard alpha) from Colorizer
+					currentColor = Colorizer.colorizeText(this.colorCode[var5], var5); // Spout AlphaText - sets current Colour (but will discard alpha) from Colorizer
 				} else if (var5 == 16) {
 					this.randomStyle = true;
 				} else if (var5 == 17) {
@@ -506,8 +507,8 @@ public class FontRenderer {
 					var7 = Tessellator.instance;
 					GL11.glDisable(GL11.GL_TEXTURE_2D);
 					var7.startDrawingQuads();
-					var12.setColorRGBA(currentColor >> 16 & 0xff, currentColor >> 8 & 0xff, currentColor & 0xff, currentAlpha); // Spout AlphaText - uses tessellator to set colour now.
-					int var8 = 1.0F; // this.underlineStyle ? -1 : 0; // Spout AlphaText - I do not see this as necessary, underlineStyle should always be true at this point.
+					var7.setColorRGBA(currentColor >> 16 & 0xff, currentColor >> 8 & 0xff, currentColor & 0xff, currentAlpha); // Spout AlphaText - uses tessellator to set colour now.
+					int var8 = 0; // this.underlineStyle ? -1 : 0; // Spout AlphaText - I do not see this as necessary, underlineStyle should always be true at this point.
 					var7.addVertex((double)(this.posX + (float)var8), (double)(this.posY + (float)this.FONT_HEIGHT), 0.0D);
 					var7.addVertex((double)(this.posX + var9), (double)(this.posY + (float)this.FONT_HEIGHT), 0.0D);
 					var7.addVertex((double)(this.posX + var9), (double)(this.posY + (float)this.FONT_HEIGHT - 1.0F), 0.0D);
@@ -607,7 +608,7 @@ public class FontRenderer {
 		if (par1 == 167) {
 			return -1;
 		}
-		return (int)getCharWidthFloat(ch);
+		return (int)getCharWidthFloat(par1);
 	}
 	// end Spout Text Alpha
 
@@ -755,28 +756,13 @@ public class FontRenderer {
 		this.bidiFlag = par1;
 	}
 
-	/**
-	 * Breaks a string into a list of pieces that will fit a specified width.
-	 */
-	public List listFormattedStringToWidth(String par1Str, int par2) {
-		return Arrays.asList(this.wrapFormattedStringToWidth(par1Str, par2).split("\n"));
+	public List func_50108_c(String par1Str, int par2) {
+		return Arrays.asList(this.func_50113_d(par1Str, par2).split("\n"));
 	}
 
-	/**
-	 * Inserts newline and formatting into a string to wrap it within the specified width.
-	 */
-	String wrapFormattedStringToWidth(String par1Str, int par2) {
-		int var3 = this.sizeStringToWidth(par1Str, par2);
 
-		if (par1Str.length() <= var3) {
-			return par1Str;
-		} else {
-			String var4 = par1Str.substring(0, var3);
-			char var5 = par1Str.charAt(var3);
-			boolean var6 = var5 == 32 || var5 == 10;
-			String var7 = getFormatFromString(var4) + par1Str.substring(var3 + (var6 ? 1 : 0));
-			return var4 + "\n" + this.wrapFormattedStringToWidth(var7, par2);
-		}
+	String func_50113_d(String par1Str, int par2) {
+		return this.wrapStringToWidth(par1Str,par2); // Spout AlphaText
 	}
 
 	/**
@@ -784,12 +770,12 @@ public class FontRenderer {
 	 */
 	// Spout AlphaText - describes how many characters of a given input string will fit within the specified screen width.
 	private int sizeStringToWidth(String par1Str, int par2) {
-		float widthSz = (float)width2;
+		float widthSz = (float)par2;
 		int lenStr = par1Str.length();
 		float widthCh = 0F;
 		boolean bold = false;
 		int ii = 0;
-		int var6 = -1;
+		int lenSp = -1;
 
 		for (; ii < lenStr; ++ii) {
 			char ch = par1Str.charAt(ii);
@@ -819,7 +805,7 @@ public class FontRenderer {
 					lenSp = ii;
 
 				default:
-					widthCh += this.getCharWidth(var8);
+					widthCh += this.getCharWidth(ch);
 
 					if (bold) {
 						widthCh+=boldOffset;
