@@ -17,27 +17,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.spoutcraft.client.gui.settings.controls;
+package org.spoutcraft.client.gui;
 
-import net.minecraft.src.GuiScreen;
+import org.spoutcraft.api.gui.GenericComboBox;
 
-import org.spoutcraft.api.event.screen.ButtonClickEvent;
-import org.spoutcraft.api.gui.GenericButton;
-import org.spoutcraft.client.SpoutClient;
-import org.spoutcraft.client.gui.chat.GuiChatSettings;
-import org.spoutcraft.client.gui.settings.GuiAdvancedOptions;
-
-public class ChatButton extends GenericButton {
-	GuiScreen parent;
-
-	public ChatButton(GuiScreen parent) {
-		super("Chat Options");
-		this.parent = parent;
+public class UpdatingComboBox extends GenericComboBox {
+	private ButtonUpdater updater = null;
+	
+	public ButtonUpdater getUpdater() {
+		return updater;
 	}
-
+	
+	public void setUpdater(ButtonUpdater updater) {
+		this.updater = updater;
+	}
+	
 	@Override
-	public void onButtonClick(ButtonClickEvent event) {
-		GuiChatSettings chatSettings = new GuiChatSettings(parent);
-		SpoutClient.getHandle().displayGuiScreen(chatSettings);
+	public void onSelectionChanged(int i, String text) {
+		getUpdater().updateButtons();
 	}
 }
